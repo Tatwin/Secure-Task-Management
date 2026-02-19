@@ -73,8 +73,8 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                             Due Date
                         </label>
                         <Input
-                            type="date"
-                            min={new Date().toISOString().split("T")[0]}
+                            type="datetime-local"
+                            min={new Date().toISOString().slice(0, 16)}
                             {...register("dueDate", { setValueAs: (v) => v ? new Date(v) : undefined })}
                             error={errors.dueDate?.message}
                         />

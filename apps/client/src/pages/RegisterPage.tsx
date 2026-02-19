@@ -8,6 +8,7 @@ import { apiClient } from "../lib/api-client";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { z } from "zod";
+import SplashCursor from "../components/SplashCursor";
 
 const RegisterPage = () => {
     const { login } = useAuth();
@@ -32,8 +33,9 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
-            <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+            <SplashCursor />
+            <div className="w-full max-w-md space-y-8 bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-gray-100 relative z-10">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         Create an account
