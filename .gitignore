@@ -9,3 +9,12 @@ coverage
 .idea
 *.tsbuildinfo
 docs/
+
+# Local Project Documentation
+TECH_STACK.md
+PROJECT_FLOW.md
+CODE_REFERENCE.md
+FEATURES_IMPLEMENTATION.md
+DEPLOYMENT_GUIDE.md
+SWAGGER_GUIDE.md
+TECH_DEEP_DIVE.md
