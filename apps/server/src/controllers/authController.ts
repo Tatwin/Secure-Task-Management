@@ -9,6 +9,7 @@ export const register = async (
     res: Response,
     next: NextFunction
 ) => {
+    console.log("Registering user:", req.body.email);
     try {
         const { email, password, name, recoveryPin } = RegisterSchema.parse(req.body);
 
@@ -33,6 +34,7 @@ export const register = async (
 
         res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
+        console.error("Registration error:", error);
         next(error);
     }
 };
@@ -42,6 +44,7 @@ export const login = async (
     res: Response,
     next: NextFunction
 ) => {
+    console.log("Login attempt:", req.body.email);
     try {
         const { email, password } = LoginSchema.parse(req.body);
 
@@ -61,6 +64,7 @@ export const login = async (
 
         res.status(200).json({ token, user: { id: user.id, email: user.email, name: user.name } });
     } catch (error) {
+        console.error("Login error:", error);
         next(error);
     }
 };
