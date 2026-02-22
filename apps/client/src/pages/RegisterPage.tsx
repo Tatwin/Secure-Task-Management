@@ -37,22 +37,22 @@ const RegisterPage = () => {
         <div className="flex min-h-screen items-center justify-center p-4 relative overflow-hidden" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}>
             <SplashCursor />
 
-            <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] blur-[150px] rounded-full" style={{ backgroundColor: 'var(--color-primary)' }} />
+            <div className="absolute inset-0 pointer-events-none opacity-20 hidden md:block">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] blur-[150px] rounded-full" style={{ backgroundColor: 'var(--color-primary)' }} />
             </div>
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="w-full max-w-lg space-y-8 p-12 rounded-[3.5rem] border shadow-2xl relative z-10"
+                className="w-full max-w-lg space-y-6 md:space-y-8 p-6 md:p-12 rounded-3xl md:rounded-[3.5rem] border shadow-2xl relative z-10"
                 style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
             >
                 <div className="text-center">
-                    <div className="mx-auto h-20 w-20 rounded-[2rem] flex items-center justify-center shadow-xl mb-8" style={{ backgroundColor: 'var(--color-primary)' }}>
-                        <Fingerprint className="h-10 w-10 text-white" />
+                    <div className="mx-auto h-16 w-16 md:h-20 md:w-20 rounded-2xl md:rounded-[2rem] flex items-center justify-center shadow-xl mb-6 md:mb-8" style={{ backgroundColor: 'var(--color-primary)' }}>
+                        <Fingerprint className="h-8 w-8 md:h-10 md:w-10 text-white" />
                     </div>
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.4em] mb-4" style={{ color: 'var(--color-primary)' }}>Welcome to VI Task</h3>
-                    <h2 className="text-4xl font-black tracking-tight mb-2">Register</h2>
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 md:mb-4" style={{ color: 'var(--color-primary)' }}>Welcome to VI Task</h3>
+                    <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-2">Register</h2>
                     <p className="opacity-40 font-bold text-[10px] uppercase tracking-widest">Join the elite mission tracking network</p>
                 </div>
 
