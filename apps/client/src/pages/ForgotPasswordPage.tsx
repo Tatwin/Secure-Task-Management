@@ -78,7 +78,7 @@ const ForgotPasswordPage = () => {
                         <KeyRound className="h-8 w-8 md:h-10 md:w-10 text-white" />
                     </motion.div>
                     <motion.h3 variants={itemVariants} className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 md:mb-4" style={{ color: 'var(--color-primary)' }}>
-                        Recovery Protocol
+                        Welcome to VI Task
                     </motion.h3>
                     <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-black tracking-tight mb-2">
                         Reset Password
