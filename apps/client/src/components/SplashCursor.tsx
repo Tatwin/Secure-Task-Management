@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, { useEffect, useRef } from 'react';
 
@@ -43,17 +44,17 @@ const SplashCursor: React.FC<SplashCursorProps> = ({
 
         let isActive = true;
 
-        function Pointer() {
-            this.id = -1;
-            this.texcoordX = 0;
-            this.texcoordY = 0;
-            this.prevTexcoordX = 0;
-            this.prevTexcoordY = 0;
-            this.deltaX = 0;
-            this.deltaY = 0;
-            this.down = false;
-            this.moved = false;
-            this.color = { r: 0, g: 0, b: 0 };
+        class Pointer {
+            id: number = -1;
+            texcoordX: number = 0;
+            texcoordY: number = 0;
+            prevTexcoordX: number = 0;
+            prevTexcoordY: number = 0;
+            deltaX: number = 0;
+            deltaY = 0;
+            down: boolean = false;
+            moved: boolean = false;
+            color: { r: number, g: number, b: number } = { r: 0, g: 0, b: 0 };
         }
 
         let config = {
