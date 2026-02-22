@@ -2,6 +2,8 @@
 
 A full-stack task management application with secure authentication and a modern dashboard.
 
+**Live Demo:** [https://vitask-project.vercel.app](https://vitask-project.vercel.app)
+
 ## Features
 
 - **User Authentication**: Secure signup and login using JWT and encrypted passwords.
