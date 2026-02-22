@@ -1,7 +1,7 @@
 import React from "react";
 import { format, differenceInHours, differenceInDays } from "date-fns";
 import { Task } from "@repo/shared";
-import { Trash2, CheckCircle2, Circle, Calendar, Eye, Edit3 } from "lucide-react";
+import { Trash2, CheckCircle2, Circle, Calendar, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 
@@ -9,12 +9,14 @@ interface TaskCardProps {
     task: Task;
     onDelete: (id: string) => void;
     onUpdateStatus: (id: string, completed: boolean) => void;
+    onView?: () => void;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({
     task,
     onDelete,
     onUpdateStatus,
+    onView,
 }) => {
     const getDueDateStatus = () => {
         if (!task.dueDate || task.completed) return null;
@@ -73,11 +75,8 @@ export const TaskCard: React.FC<TaskCardProps> = ({
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="p-1.5 hover:bg-[var(--color-primary)]/10 rounded-xl transition-all" onClick={() => toast.success("Feature coming soon")}>
+                        <button className="p-1.5 hover:bg-[var(--color-primary)]/10 rounded-xl transition-all" onClick={onView}>
                             <Eye className="w-4 h-4" />
-                        </button>
-                        <button className="p-1.5 hover:bg-[var(--color-primary)]/10 rounded-xl transition-all" onClick={() => toast.success("Feature coming soon")}>
-                            <Edit3 className="w-4 h-4" />
                         </button>
                     </div>
                 </div>

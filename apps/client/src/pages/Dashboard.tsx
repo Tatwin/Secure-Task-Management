@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useTasks } from "../hooks/useTasks";
 import { TaskCard } from "../components/TaskCard";
 import { CreateTaskModal } from "../components/CreateTaskModal";
+import { ViewTaskModal } from "../components/ViewTaskModal";
 import { CalendarView } from "../components/CalendarView";
 import { Button } from "../components/ui/Button";
 import {
@@ -38,6 +39,7 @@ const Dashboard = () => {
 
     const [activeTab, setActiveTab] = useState<'home' | 'tasks' | 'completed' | 'calendar' | 'settings'>('home');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [viewTask, setViewTask] = useState<Task | null>(null);
     const [search, setSearch] = useState("");
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -302,7 +304,7 @@ const Dashboard = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                                     <AnimatePresence mode="popLayout">
                                         {ongoingTasks.filter(t => t.title.toLowerCase().includes(search.toLowerCase())).map(task => (
-                                            <TaskCard key={task.id} task={task} onDelete={handleDelete} onUpdateStatus={handleUpdateStatus} />
+                                            <TaskCard key={task.id} task={task} onDelete={handleDelete} onUpdateStatus={handleUpdateStatus} onView={() => setViewTask(task)} />
                                         ))}
                                     </AnimatePresence>
                                 </div>
@@ -325,7 +327,7 @@ const Dashboard = () => {
                             >
                                 <AnimatePresence mode="popLayout">
                                     {completedTasks.map(task => (
-                                        <TaskCard key={task.id} task={task} onDelete={handleDelete} onUpdateStatus={handleUpdateStatus} />
+                                        <TaskCard key={task.id} task={task} onDelete={handleDelete} onUpdateStatus={handleUpdateStatus} onView={() => setViewTask(task)} />
                                     ))}
                                 </AnimatePresence>
                                 {completedTasks.length === 0 && (
@@ -394,22 +396,24 @@ const Dashboard = () => {
                                                 <div className="space-y-3">
                                                     <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Full Identification</label>
                                                     <div className="flex flex-col sm:flex-row gap-4">
-                                                        <Input value={user?.name || ""} readOnly className="h-12 w-full rounded-xl bg-[var(--color-background)] opacity-60 flex-1" />
-                                                        <Button variant="outline" className="h-12 w-full sm:w-auto px-4 rounded-xl font-bold text-xs" onClick={() => toast.success("Name update coming soon")}>Update</Button>
+                                                        <Input value={user?.name || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
                                                     </div>
                                                 </div>
                                                 <div className="space-y-3">
                                                     <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Network Address</label>
                                                     <div className="flex flex-col sm:flex-row gap-4">
-                                                        <Input value={user?.email || ""} readOnly className="h-12 w-full rounded-xl bg-[var(--color-background)] opacity-60 flex-1" />
-                                                        <Button variant="outline" className="h-12 w-full sm:w-auto px-4 rounded-xl font-bold text-xs" onClick={() => toast.success("Email update coming soon")}>Update</Button>
+                                                        <Input value={user?.email || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="pt-6">
-                                                <Button variant="outline" className="w-full h-14 rounded-2xl font-black uppercase tracking-widest text-[10px] border-red-500/20 text-red-500 hover:bg-red-500 hover:text-white transition-all">
-                                                    Change Security Password
+                                                <Button
+                                                    variant="outline"
+                                                    className="w-full h-16 rounded-2xl font-black uppercase tracking-widest text-xs border-amber-500/20 text-amber-500 hover:bg-amber-500 hover:text-white shadow-xl transition-all"
+                                                    onClick={() => toast.success("Change password modal logic to be implemented soon.")}
+                                                >
+                                                    Modify Security Protocol
                                                 </Button>
                                             </div>
                                         </div>
@@ -491,6 +495,11 @@ const Dashboard = () => {
                 onClose={() => setIsModalOpen(false)}
                 onSubmit={handleCreateTask}
                 isLoading={createTask.isPending}
+            />
+            <ViewTaskModal
+                isOpen={!!viewTask}
+                onClose={() => setViewTask(null)}
+                task={viewTask}
             />
         </div>
     );
