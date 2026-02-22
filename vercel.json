@@ -1,34 +1,25 @@
 {
     "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "apps/client/package.json",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
+            "source": "/auth/(.*)",
+            "destination": "/api/index"
         },
         {
-            "src": "apps/server/src/index.ts",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/auth/(.*)",
-            "dest": "apps/server/src/index.ts"
+            "source": "/tasks/(.*)",
+            "destination": "/api/index"
         },
         {
-            "src": "/tasks/(.*)",
-            "dest": "apps/server/src/index.ts"
+            "source": "/api-docs/(.*)",
+            "destination": "/api/index"
         },
         {
-            "src": "/api-docs/(.*)",
-            "dest": "apps/server/src/index.ts"
+            "source": "/(.*)",
+            "destination": "/apps/client/dist/$1"
         },
         {
-            "src": "/(.*)",
-            "dest": "apps/client/$1"
+            "source": "/(.*)",
+            "destination": "/apps/client/dist/index.html"
         }
     ]
 }
