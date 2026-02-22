@@ -10,7 +10,8 @@
     "dev": "concurrently \"npm run dev --workspace=client\" \"npm run dev --workspace=server\"",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "fix-db": "npm run build --workspace=@repo/shared && npm run prisma:generate --workspace=server && npm run prisma:push --workspace=server"
+    "fix-db": "npm run build --workspace=@repo/shared && npm run prisma:generate --workspace=server && npm run prisma:push --workspace=server",
+    "postinstall": "npm run build --workspace=@repo/shared && npm run prisma:generate --workspace=server"
   },
   "devDependencies": {
     "concurrently": "^8.2.0",

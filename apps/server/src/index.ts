@@ -48,7 +48,9 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+if (process.env.NODE_ENV !== "production" && process.env.VERCEL !== "1") {
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+}
 
 // Routes
 const router = express.Router();
