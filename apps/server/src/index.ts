@@ -4,6 +4,8 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
+import path from "path";
+
 import { authRoutes } from "./routes/authRoutes";
 import { taskRoutes } from "./routes/taskRoutes";
 import { errorHandler } from "./middleware/errorHandler";
@@ -46,13 +48,18 @@ const swaggerOptions = {
     },
     apis: [
         "./apps/server/src/routes/*.ts",
+        "./apps/server/src/routes/*.js",
         "./src/routes/*.ts",
-        "./dist/index.js"
+        "./src/routes/*.js",
+        "./dist/routes/*.js",
+        "../../apps/server/src/routes/*.ts",
     ], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
+
 const swaggerUiOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
     customCssUrl: "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.min.css",
     customJs: [
         "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui-bundle.js",
@@ -60,7 +67,11 @@ const swaggerUiOptions = {
     ],
 };
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs, swaggerUiOptions));
+app.use("/api-docs", swaggerUi.serve);
+app.get("/api-docs", (req, res) => {
+    const html = swaggerUi.generateHTML(swaggerDocs, swaggerUiOptions);
+    res.send(html);
+});
 
 // Routes
 const router = express.Router();
