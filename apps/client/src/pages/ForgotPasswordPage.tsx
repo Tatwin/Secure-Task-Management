@@ -84,7 +84,7 @@ const ForgotPasswordPage = () => {
                         Reset Password
                     </motion.h2>
                     <motion.p variants={itemVariants} className="opacity-40 font-bold text-[10px] uppercase tracking-widest">
-                        Securely recover access to your account
+                        Recover your account
                     </motion.p>
                 </div>
 
