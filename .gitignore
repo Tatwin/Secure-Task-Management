@@ -18,3 +18,6 @@ FEATURES_IMPLEMENTATION.md
 DEPLOYMENT_GUIDE.md
 SWAGGER_GUIDE.md
 TECH_DEEP_DIVE.md
+
+# Build and local logs
+*.txt
