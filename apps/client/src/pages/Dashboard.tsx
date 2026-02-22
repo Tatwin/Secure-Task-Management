@@ -19,7 +19,6 @@ import {
     CheckCircle,
     Settings as SettingsIcon,
     User,
-    Lock,
     Moon,
     Sun,
     Menu,
@@ -43,10 +42,6 @@ const Dashboard = () => {
     const [search, setSearch] = useState("");
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    // Settings state
-    const [isPinVerified, setIsPinVerified] = useState(false);
-    const [pinInput, setPinInput] = useState("");
 
     const greetingMessage = useMemo(() => {
         const hour = new Date().getHours();
@@ -120,15 +115,6 @@ const Dashboard = () => {
             toast.success(completed ? "Task completed!" : "Task marked as ongoing");
         } catch (e) {
             toast.error("Failed to update task");
-        }
-    };
-
-    const verifyPin = () => {
-        if (pinInput === (user as any)?.recoveryPin || pinInput === "1234") {
-            setIsPinVerified(true);
-            setPinInput("");
-        } else {
-            toast.error("Incorrect PIN");
         }
     };
 
@@ -358,132 +344,96 @@ const Dashboard = () => {
                                 exit={{ opacity: 0, y: -20 }}
                                 className="max-w-4xl space-y-10"
                             >
-                                {!isPinVerified ? (
-                                    <div className="p-10 rounded-[2.5rem] border shadow-2xl flex flex-col items-center text-center gap-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
-                                        <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500">
-                                            <Lock className="w-8 h-8" />
+                                <div className="space-y-10">
+                                    {/* User Settings */}
+                                    <div className="p-10 rounded-[2.5rem] border shadow-xl space-y-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+                                        <h3 className="text-xl font-black uppercase tracking-widest border-b pb-6" style={{ borderColor: 'var(--color-border)' }}>Identity Core</h3>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            <div className="space-y-3">
+                                                <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Full Identification</label>
+                                                <div className="flex flex-col sm:flex-row gap-4">
+                                                    <Input value={user?.name || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Network Address</label>
+                                                <div className="flex flex-col sm:flex-row gap-4">
+                                                    <Input value={user?.email || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 className="text-2xl font-black">Restricted Access</h3>
-                                            <p className="opacity-50 font-medium">Enter your 4-digit security PIN to unlock terminal settings.</p>
-                                        </div>
-                                        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                                            <input
-                                                type="password"
-                                                maxLength={4}
-                                                value={pinInput}
-                                                onChange={(e) => setPinInput(e.target.value)}
-                                                className="w-full sm:w-48 h-16 rounded-2xl text-center text-3xl font-black border-none ring-2 ring-[var(--color-border)] focus:ring-[var(--color-primary)] bg-[var(--color-background)]"
-                                                style={{ color: 'var(--color-text)' }}
-                                                placeholder="••••"
-                                            />
+
+                                        <div className="pt-6">
                                             <Button
-                                                onClick={verifyPin}
-                                                className="w-full sm:w-auto h-16 px-8 rounded-2xl font-black uppercase tracking-widest text-xs"
+                                                className="w-full h-16 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl transition-all"
                                                 style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}
+                                                onClick={() => toast.success("Change password modal logic to be implemented soon.")}
                                             >
-                                                Unlock
+                                                Modify Security Protocol
                                             </Button>
                                         </div>
                                     </div>
-                                ) : (
-                                    <div className="space-y-10">
-                                        {/* User Settings */}
-                                        <div className="p-10 rounded-[2.5rem] border shadow-xl space-y-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
-                                            <h3 className="text-xl font-black uppercase tracking-widest border-b pb-6" style={{ borderColor: 'var(--color-border)' }}>Identity Core</h3>
+
+                                    {/* Interface Settings */}
+                                    <div className="p-10 rounded-[2.5rem] border shadow-xl space-y-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+                                        <h3 className="text-xl font-black uppercase tracking-widest border-b pb-6" style={{ borderColor: 'var(--color-border)' }}>Visual Interface</h3>
+
+                                        <div className="space-y-6">
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <h4 className="font-black text-lg">Luminance Mode</h4>
+                                                    <p className="text-sm opacity-50">Toggle between light and dark spectral themes.</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
+                                                    className="w-20 h-10 rounded-full border relative p-1 transition-all"
+                                                    style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
+                                                >
+                                                    <motion.div
+                                                        animate={{ x: mode === 'light' ? 0 : 40 }}
+                                                        className="w-8 h-8 rounded-full flex items-center justify-center text-white"
+                                                        style={{ backgroundColor: 'var(--color-primary)' }}
+                                                    >
+                                                        {mode === 'light' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                                                    </motion.div>
+                                                </button>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <h4 className="font-black text-lg">Neural Palette</h4>
+                                                <div className="grid grid-cols-4 sm:grid-cols-6 gap-4">
+                                                    {['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#14b8a6'].map(color => (
+                                                        <button
+                                                            key={color}
+                                                            onClick={() => setPalette({ primary: color })}
+                                                            className={`w-full aspect-square rounded-2xl border-4 transition-all hover:scale-110 ${palette.primary === color ? 'border-[var(--color-text)] shadow-xl scale-110' : 'border-transparent'}`}
+                                                            style={{ backgroundColor: color }}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                                 <div className="space-y-3">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Full Identification</label>
-                                                    <div className="flex flex-col sm:flex-row gap-4">
-                                                        <Input value={user?.name || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
-                                                    </div>
-                                                </div>
-                                                <div className="space-y-3">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Network Address</label>
-                                                    <div className="flex flex-col sm:flex-row gap-4">
-                                                        <Input value={user?.email || ""} readOnly className="h-14 w-full rounded-2xl bg-[var(--color-background)] opacity-60 flex-1 px-4 cursor-not-allowed" />
+                                                    <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Terminal Text Color</label>
+                                                    <div className="flex gap-4">
+                                                        <input type="color" value={palette.text} onChange={(e) => setPalette({ text: e.target.value })} className="w-full h-12 rounded-xl bg-[var(--color-background)] border-none" />
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="pt-6">
-                                                <Button
-                                                    variant="outline"
-                                                    className="w-full h-16 rounded-2xl font-black uppercase tracking-widest text-xs border-amber-500/20 text-amber-500 hover:bg-amber-500 hover:text-white shadow-xl transition-all"
-                                                    onClick={() => toast.success("Change password modal logic to be implemented soon.")}
-                                                >
-                                                    Modify Security Protocol
-                                                </Button>
-                                            </div>
+                                            <button
+                                                onClick={resetTheme}
+                                                className="w-full py-4 rounded-xl border font-black uppercase tracking-widest text-[10px] hover:bg-[var(--color-border)]/20 transition-all mt-4"
+                                                style={{ borderColor: 'var(--color-border)' }}
+                                            >
+                                                Restore Default Protocol
+                                            </button>
                                         </div>
-
-                                        {/* Interface Settings */}
-                                        <div className="p-10 rounded-[2.5rem] border shadow-xl space-y-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
-                                            <h3 className="text-xl font-black uppercase tracking-widest border-b pb-6" style={{ borderColor: 'var(--color-border)' }}>Visual Interface</h3>
-
-                                            <div className="space-y-6">
-                                                <div className="flex items-center justify-between">
-                                                    <div>
-                                                        <h4 className="font-black text-lg">Luminance Mode</h4>
-                                                        <p className="text-sm opacity-50">Toggle between light and dark spectral themes.</p>
-                                                    </div>
-                                                    <button
-                                                        onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
-                                                        className="w-20 h-10 rounded-full border relative p-1 transition-all"
-                                                        style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-background)' }}
-                                                    >
-                                                        <motion.div
-                                                            animate={{ x: mode === 'light' ? 0 : 40 }}
-                                                            className="w-8 h-8 rounded-full flex items-center justify-center text-white"
-                                                            style={{ backgroundColor: 'var(--color-primary)' }}
-                                                        >
-                                                            {mode === 'light' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                                                        </motion.div>
-                                                    </button>
-                                                </div>
-
-                                                <div className="space-y-4">
-                                                    <h4 className="font-black text-lg">Neural Palette</h4>
-                                                    <div className="grid grid-cols-4 sm:grid-cols-6 gap-4">
-                                                        {['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#14b8a6'].map(color => (
-                                                            <button
-                                                                key={color}
-                                                                onClick={() => setPalette({ primary: color })}
-                                                                className={`w-full aspect-square rounded-2xl border-4 transition-all hover:scale-110 ${palette.primary === color ? 'border-[var(--color-text)] shadow-xl scale-110' : 'border-transparent'}`}
-                                                                style={{ backgroundColor: color }}
-                                                            />
-                                                        ))}
-                                                    </div>
-                                                </div>
-
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                    <div className="space-y-3">
-                                                        <label className="text-[10px] font-black uppercase tracking-widest opacity-50 ml-1">Terminal Text Color</label>
-                                                        <div className="flex gap-4">
-                                                            <input type="color" value={palette.text} onChange={(e) => setPalette({ text: e.target.value })} className="w-full h-12 rounded-xl bg-[var(--color-background)] border-none" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <button
-                                                    onClick={resetTheme}
-                                                    className="w-full py-4 rounded-xl border font-black uppercase tracking-widest text-[10px] hover:bg-[var(--color-border)]/20 transition-all mt-4"
-                                                    style={{ borderColor: 'var(--color-border)' }}
-                                                >
-                                                    Restore Default Protocol
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <button
-                                            onClick={() => setIsPinVerified(false)}
-                                            className="w-full py-4 text-xs font-black uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
-                                        >
-                                            Lock Settings Terminal
-                                        </button>
                                     </div>
-                                )}
+
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
