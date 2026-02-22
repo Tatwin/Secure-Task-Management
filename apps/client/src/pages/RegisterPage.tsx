@@ -53,7 +53,7 @@ const RegisterPage = () => {
                     </div>
                     <h3 className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 md:mb-4" style={{ color: 'var(--color-primary)' }}>Welcome to VI Task</h3>
                     <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-2">Register</h2>
-                    <p className="opacity-40 font-bold text-[10px] uppercase tracking-widest">Join the elite mission tracking network</p>
+                    <p className="opacity-40 font-bold text-[10px] uppercase tracking-widest">Create an account to securely manage your agenda</p>
                 </div>
 
                 <form className="mt-10 space-y-6" onSubmit={handleSubmit(onSubmit)}>
