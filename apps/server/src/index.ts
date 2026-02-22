@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "*",
     credentials: true,
 }));
 app.use(express.json());
@@ -62,7 +62,11 @@ app.get("/", (req, res) => {
     res.send("Secure Task Dashboard API is running");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+    });
+}
+
+export default app;
