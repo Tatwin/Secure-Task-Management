@@ -10,13 +10,7 @@
         "composite": true,
         "declaration": true,
         "declarationMap": true,
-        "sourceMap": true,
-        "baseUrl": ".",
-        "paths": {
-            "@repo/shared": [
-                "packages/shared/src/index.ts"
-            ]
-        }
+        "sourceMap": true
     },
     "exclude": [
         "node_modules",
