@@ -4,6 +4,7 @@ import { useTasks } from "../hooks/useTasks";
 import { TaskCard } from "../components/TaskCard";
 import { CreateTaskModal } from "../components/CreateTaskModal";
 import { ViewTaskModal } from "../components/ViewTaskModal";
+import { ChangePasswordModal } from "../components/ChangePasswordModal";
 import { CalendarView } from "../components/CalendarView";
 import { Button } from "../components/ui/Button";
 import {
@@ -40,6 +41,7 @@ const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [viewTask, setViewTask] = useState<Task | null>(null);
     const [search, setSearch] = useState("");
+    const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -368,9 +370,9 @@ const Dashboard = () => {
                                             <Button
                                                 className="w-full h-16 rounded-2xl font-black uppercase tracking-widest text-xs shadow-xl transition-all"
                                                 style={{ backgroundColor: 'var(--color-primary)', color: 'white' }}
-                                                onClick={() => toast.success("Change password modal logic to be implemented soon.")}
+                                                onClick={() => setIsPasswordModalOpen(true)}
                                             >
-                                                Modify Security Protocol
+                                                Change Password
                                             </Button>
                                         </div>
                                     </div>
@@ -450,6 +452,10 @@ const Dashboard = () => {
                 isOpen={!!viewTask}
                 onClose={() => setViewTask(null)}
                 task={viewTask}
+            />
+            <ChangePasswordModal
+                isOpen={isPasswordModalOpen}
+                onClose={() => setIsPasswordModalOpen(false)}
             />
         </div>
     );

@@ -62,5 +62,4 @@ A full-stack task management application with secure authentication and a modern
 
 ## API Documentation
 
-Once the server is running, you can view the API documentation at:
-`http://localhost:3000/api-docs`
+Once the server is running, you can view the API documentation at: `https://vitask-project.vercel.app/api-docs` as we have hosted the website.
