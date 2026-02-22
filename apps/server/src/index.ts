@@ -44,13 +44,15 @@ const swaggerOptions = {
             },
         ],
     },
-    apis: ["./src/routes/*.ts"], // Path to the API docs
+    apis: [
+        "./apps/server/src/routes/*.ts",
+        "./src/routes/*.ts",
+        "./dist/index.js"
+    ], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-if (process.env.NODE_ENV !== "production" && process.env.VERCEL !== "1") {
-    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-}
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Routes
 const router = express.Router();
