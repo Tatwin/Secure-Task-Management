@@ -51,8 +51,12 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Routes
-app.use("/auth", authRoutes);
-app.use("/tasks", taskRoutes);
+const router = express.Router();
+router.use("/auth", authRoutes);
+router.use("/tasks", taskRoutes);
+
+app.use("/api", router);
+app.use("/", router);
 
 // Error Handler
 app.use(errorHandler);

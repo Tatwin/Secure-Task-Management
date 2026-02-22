@@ -8,14 +8,14 @@ export const useTasks = () => {
     const { data: tasks, isLoading, error } = useQuery({
         queryKey: ["tasks"],
         queryFn: async () => {
-            const response = await apiClient.get<Task[]>("/tasks");
+            const response = await apiClient.get<Task[]>("tasks");
             return response.data;
         },
     });
 
     const createTask = useMutation({
         mutationFn: async (newTask: CreateTaskRequest) => {
-            const response = await apiClient.post<Task>("/tasks", newTask);
+            const response = await apiClient.post<Task>("tasks", newTask);
             return response.data;
         },
         onSuccess: () => {
@@ -25,7 +25,7 @@ export const useTasks = () => {
 
     const updateTask = useMutation({
         mutationFn: async ({ id, data }: { id: string; data: UpdateTaskRequest }) => {
-            const response = await apiClient.patch<Task>(`/tasks/${id}`, data);
+            const response = await apiClient.patch<Task>(`tasks/${id}`, data);
             return response.data;
         },
         onSuccess: () => {
@@ -35,7 +35,7 @@ export const useTasks = () => {
 
     const deleteTask = useMutation({
         mutationFn: async (id: string) => {
-            await apiClient.delete(`/tasks/${id}`);
+            await apiClient.delete(`tasks/${id}`);
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["tasks"] });

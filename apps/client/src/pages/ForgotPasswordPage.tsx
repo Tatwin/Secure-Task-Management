@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
         try {
             setError("");
             setSuccess("");
-            await apiClient.post("/auth/reset-password", data);
+            await apiClient.post("auth/reset-password", data);
             setSuccess("Password reset successfully! Redirecting to login...");
             setTimeout(() => {
                 navigate("/login");
