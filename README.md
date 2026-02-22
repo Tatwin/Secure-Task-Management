@@ -39,12 +39,7 @@ A full-stack task management application with secure authentication and a modern
    ```
 
 2. **Environment Configuration**:
-   Create a `.env` file in the `apps/server` directory:
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/taskdb"
-   JWT_SECRET="your_secret_key"
-   PORT=3000
-   ```
+   Create a `.env` file in the `apps/server` directory and configure your environment variables (refer to `.env.example`).
 
 3. **Database Migration**:
    Apply database migrations to your local PostgreSQL instance:
