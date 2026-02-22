@@ -1,135 +1,73 @@
-# Secure Task Management Dashboard
+# Secure Task Dashboard
 
-A full-stack implementation of a secure task management dashboard, built with modern web technologies and best practices.
+A full-stack task management application with secure authentication and a modern dashboard.
 
-## 🚀 Tech Stack
+## Features
 
-### Frontend (`apps/client`)
-- **Framework**: React 18 + Vite
-- **Language**: TypeScript (Strict Mode)
-- **Styling**: Tailwind CSS + Framer Motion (Glassmorphism UI)
-- **State Management**: React Query (TanStack Query v5) + Context API
-- **Routing**: React Router v6
-- **Forms**: React Hook Form + Zod
-- **Type Safety**: Shared types with backend via Monorepo
+- **User Authentication**: Secure signup and login using JWT and encrypted passwords.
+- **Task Management**: Create, update, view, and delete tasks with ease.
+- **Modern UI**: Clean and responsive dashboard built with React and Tailwind CSS.
+- **Type Safety**: Built entirely with TypeScript for better code quality and reliability.
+- **API Documentation**: Automated documentation via Swagger.
 
-### Backend (`apps/server`)
-- **Runtime**: Node.js + Express
-- **Language**: TypeScript (Strict Mode)
-- **Database**: PostgreSQL (via Docker) + Prisma ORM
-- **Authentication**: JWT (JSON Web Tokens) + Bcrypt
-- **Validation**: Zod (Shared Schemas)
-- **Documentation**: Swagger UI
+## Tech Stack
 
-### Infrastructure
-- **Monorepo**: NPM Workspaces
-- **Containerization**: Docker Compose (PostgreSQL)
+### Frontend
+- React (Vite)
+- Tailwind CSS
+- Framer Motion
+- TanStack Query (React Query)
+- React Router
 
----
+### Backend
+- Node.js (Express)
+- Prisma (PostgreSQL)
+- Zod (Validation)
+- JWT (Auth)
 
-## 🛠️ Setup Instructions
+## Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- Docker & Docker Compose
+- Node.js (v18 or higher)
+- Docker
 
-### 1. Clone & Install
-```bash
-git clone <repository-url>
-cd secure-task-dashboard
-npm install
-```
+### Setup
 
-### 2. Environment Variables
-Create `.env` files in `apps/server` and `apps/client` based on `.env.example`.
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-**apps/server/.env**
-```env
-DATABASE_URL="postgresql://admin:password123@localhost:5432/taskdb?schema=public"
-JWT_SECRET="your-super-secret-key"
-PORT=3000
-```
+2. **Environment Configuration**:
+   Create a `.env` file in the `apps/server` directory:
+   ```env
+   DATABASE_URL="postgresql://admin:password123@localhost:5432/taskdb"
+   JWT_SECRET="your_secret_key"
+   PORT=3000
+   ```
 
-### 3. Start Database
-```bash
-docker-compose up -d
-```
-This starts a PostgreSQL instance on port 5432.
+3. **Database Setup**:
+   Start the database using Docker:
+   ```bash
+   docker-compose up -d
+   ```
+   Apply database migrations:
+   ```bash
+   npx prisma migrate dev --schema=apps/server/prisma/schema.prisma
+   ```
 
-### 4. Database Migration
-Initialize the database schema:
-```bash
-# In root directory
-npx prisma migrate dev --name init --schema=apps/server/prisma/schema.prisma
-```
+4. **Shared Types**:
+   Build the shared package:
+   ```bash
+   npm run build --workspace=@repo/shared
+   ```
 
-### 5. Build Shared Package
-Build the shared types package to ensure it's available for client and server:
-```bash
-npm run build --workspace=@repo/shared
-```
+5. **Run the App**:
+   ```bash
+   npm run dev
+   ```
 
-### 6. Run Application
-Start both frontend and backend in development mode:
-```bash
-npm run dev
-```
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:3000
-- **Swagger Docs**: http://localhost:3000/api-docs
+## API Documentation
 
----
-
-## 🏗️ Architecture
-
-The project follows a Monorepo structure:
-
-```
-secure-task-dashboard/
-├── apps/
-│   ├── client/       # React Frontend
-│   └── server/       # Express Backend
-├── packages/
-│   └── shared/       # Shared Zod schemas & types
-├── docker-compose.yml
-└── package.json
-```
-
-### Key Features
-- **Type Safety**: Zod schemas in `packages/shared` are used for:
-  - Backend request validation.
-  - Frontend form validation.
-  - TypeScript type inference (single source of truth).
-- **Security**:
-  - HTTP-only cookies (optional configuration) or Secure LocalStorage for JWT.
-  - Protected Routes (Middleware verifies Bearer token).
-  - Password Hashing with Bcrypt.
-- **Performance**:
-  - React Query for efficient data fetching, caching, and optimistic updates.
-  - Tailwind CSS for minimal CSS bundle size.
-
-## 🧪 API Documentation
-
-The API is fully documented using Swagger/OpenAPI.
-After starting the server, visit: **http://localhost:3000/api-docs**
-
-### Endpoints
-- **Auth**:
-  - `POST /auth/register` - Create account
-  - `POST /auth/login` - Authenticate
-- **Tasks**:
-  - `GET /tasks` - List user tasks
-  - `POST /tasks` - Create task
-  - `PATCH /tasks/:id` - Update task
-  - `DELETE /tasks/:id` - Delete task
-
----
-
-## ✅ Deliverables Checklist
-- [x] Monorepo Setup
-- [x] Strict TypeScript
-- [x] Dockerized PostgreSQL
-- [x] JWT Authentication
-- [x] Swagger Documentation
-- [x] React Query Implementation
-- [x] Glassmorphism UI
+Once the server is running, you can view the API documentation at:
+`http://localhost:3000/api-docs`
