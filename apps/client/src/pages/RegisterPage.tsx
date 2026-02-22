@@ -25,7 +25,7 @@ const RegisterPage = () => {
 
     const onSubmit = async (data: any) => {
         try {
-            const response = await apiClient.post("/api/auth/register", data);
+            const response = await apiClient.post("auth/register", data);
             login(response.data.token, response.data.user);
             navigate("/");
         } catch (err: any) {
