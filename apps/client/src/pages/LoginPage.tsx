@@ -25,7 +25,7 @@ const LoginPage = () => {
 
     const onSubmit = async (data: LoginRequest) => {
         try {
-            const response = await apiClient.post("auth/login", data);
+            const response = await apiClient.post("/api/auth/login", data);
             login(response.data.token, response.data.user);
             navigate("/");
         } catch (err: any) {
