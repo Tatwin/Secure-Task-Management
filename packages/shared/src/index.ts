@@ -57,6 +57,7 @@ export const CreateTaskSchema = z.object({
 
 export const UpdateTaskSchema = TaskSchema.partial();
 
+export type Priority = z.infer<typeof PrioritySchema>;
 export type User = z.infer<typeof UserSchema>;
 export type RegisterRequest = z.infer<typeof RegisterSchema>;
 export type LoginRequest = z.infer<typeof LoginSchema>;

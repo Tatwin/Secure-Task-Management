@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateTaskSchema, type CreateTaskRequest, PriorityValues } from "@repo/shared";
+import { CreateTaskSchema, type CreateTaskRequest, PriorityValues, type Priority } from "@repo/shared";
 import { Button } from "./ui/Button.tsx";
 import { X, Calendar as CalendarIcon, Type, AlignLeft, Sparkles, Plus, Flag } from "lucide-react";
 import DatePicker from "react-datepicker";
@@ -115,7 +115,7 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                                         Task Priority
                                     </label>
                                     <div className="grid grid-cols-3 gap-4">
-                                        {PriorityValues.map((p: (typeof PriorityValues)[number]) => (
+                                        {(PriorityValues as unknown as Priority[]).map((p) => (
                                             <button
                                                 key={p}
                                                 type="button"
