@@ -4,4 +4,43 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Fallback values */
+  --color-primary: #3b82f6;
+  --color-secondary: #6366f1;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+}
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 0.4;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
 }

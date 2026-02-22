@@ -23,6 +23,9 @@ export const ResetPasswordSchema = z.object({
     newPassword: z.string().min(6),
 });
 
+export const PriorityValues = ["LOW", "MEDIUM", "HIGH"] as const;
+export const PrioritySchema = z.enum(PriorityValues);
+
 export const TaskSchema = z.object({
     id: z.string().uuid().optional(),
     title: z.string().min(1, "Title is required"),
@@ -30,6 +33,7 @@ export const TaskSchema = z.object({
     completed: z.boolean().default(false),
     completedAt: z.union([z.string(), z.date()]).optional(),
     dueDate: z.string().or(z.date()).optional(), // Accept string for API JSON
+    priority: PrioritySchema.default("MEDIUM"),
     userId: z.string().uuid().optional(),
     createdAt: z.date().optional(),
     updatedAt: z.date().optional(),
@@ -38,6 +42,7 @@ export const TaskSchema = z.object({
 export const CreateTaskSchema = z.object({
     title: z.string().min(1, "Title is required"),
     description: z.string().optional(),
+    priority: PrioritySchema.default("MEDIUM"),
     dueDate: z.preprocess((arg) => {
         if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
         return arg;
@@ -45,7 +50,8 @@ export const CreateTaskSchema = z.object({
         if (!date) return true;
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        return date >= today;
+        // Allow a 1-hour buffer for clock drift
+        return date.getTime() >= today.getTime() - 3600000;
     }, { message: "Due date cannot be in the past" })),
 });
 

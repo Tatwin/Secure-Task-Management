@@ -28,7 +28,7 @@ export const register = async (
         });
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-            expiresIn: "1h",
+            expiresIn: "24h",
         });
 
         res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name } });
@@ -56,7 +56,7 @@ export const login = async (
         }
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-            expiresIn: "1h",
+            expiresIn: "24h",
         });
 
         res.status(200).json({ token, user: { id: user.id, email: user.email, name: user.name } });

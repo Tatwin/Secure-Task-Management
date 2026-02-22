@@ -18,6 +18,7 @@ export const getTasks = async (
             orderBy: [
                 { completed: "asc" },
                 { dueDate: "asc" },
+                { priority: "desc" },
                 { createdAt: "desc" },
             ],
         });
@@ -42,7 +43,7 @@ export const createTask = async (
             const dueDate = new Date(data.dueDate);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            if (dueDate < today) {
+            if (dueDate.getTime() < today.getTime() - 3600000) {
                 return res.status(400).json({ message: "Due date cannot be in the past" });
             }
         }
@@ -56,6 +57,7 @@ export const createTask = async (
 
         res.status(201).json(task);
     } catch (error) {
+        console.error("Create Task Error:", error);
         next(error);
     }
 };
