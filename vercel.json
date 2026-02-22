@@ -7,11 +7,6 @@
         },
         {
             "source": "/(.*)",
-            "destination": "/apps/client/dist/$1",
-            "check": true
-        },
-        {
-            "source": "/(.*)",
             "destination": "/apps/client/dist/index.html"
         }
     ]
