@@ -115,14 +115,14 @@ export const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
                                         Task Priority
                                     </label>
                                     <div className="grid grid-cols-3 gap-4">
-                                        {PriorityValues.map((p) => (
+                                        {PriorityValues.map((p: (typeof PriorityValues)[number]) => (
                                             <button
                                                 key={p}
                                                 type="button"
                                                 onClick={() => setValue("priority", p)}
                                                 className={`py-4 rounded-xl border-2 font-black text-[10px] uppercase tracking-widest transition-all duration-300 ${watchPriority === p
-                                                        ? "scale-105 shadow-lg border-[var(--color-primary)] text-[var(--color-primary)] bg-[var(--color-primary)]/5"
-                                                        : "opacity-40 border-[var(--color-border)] hover:opacity-100 bg-[var(--color-background)]"
+                                                    ? "scale-105 shadow-lg border-[var(--color-primary)] text-[var(--color-primary)] bg-[var(--color-primary)]/5"
+                                                    : "opacity-40 border-[var(--color-border)] hover:opacity-100 bg-[var(--color-background)]"
                                                     }`}
                                             >
                                                 {p}
