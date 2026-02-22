@@ -1,7 +1,7 @@
 import React from "react";
 import { format, differenceInHours, differenceInDays } from "date-fns";
 import { Task } from "@repo/shared";
-import { X, Calendar as CalendarIcon, Type, AlignLeft, Flag, Clock, User, CheckCircle2 } from "lucide-react";
+import { X, Calendar as CalendarIcon, Type, AlignLeft, Clock, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ViewTaskModalProps {

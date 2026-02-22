@@ -3,7 +3,6 @@ import { format, differenceInHours, differenceInDays } from "date-fns";
 import { Task } from "@repo/shared";
 import { Trash2, CheckCircle2, Circle, Calendar, Eye } from "lucide-react";
 import { motion } from "framer-motion";
-import toast from "react-hot-toast";
 
 interface TaskCardProps {
     task: Task;

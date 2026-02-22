@@ -25,7 +25,7 @@ import {
     Menu,
     X,
 } from "lucide-react";
-import { CreateTaskRequest } from "@repo/shared";
+import { CreateTaskRequest, Task } from "@repo/shared";
 import { Input } from "../components/ui/Input";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
